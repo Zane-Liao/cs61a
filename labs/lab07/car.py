@@ -29,3 +29,12 @@ class Car(object):
         self.gas += 20
         return 'Gas level: ' + str(self.gas)
 
+class MonsterTruck(Car):
+     size = 'Monster'
+
+     def rev(self):
+         print('Vroom! This Monster Truck is huge!')
+
+     def drive(self):
+         self.rev()
+         return Car.drive(self)
