@@ -23,6 +23,7 @@ class Card:
         500
         """
         "*** YOUR CODE HERE ***"
+        
 
     def power(self, other_card):
         """
