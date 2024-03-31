@@ -1,1 +1,6 @@
 'scale-correct', (0, 66)
+'Card.__init__-correct', (512, 66)
+'Card.power-correct', (1024, 66)
+'Player.__init__-correct', (1536, 66)
+'Player.draw-correct', (2048, 66)
+'Player.play-correct', (2560, 66)
