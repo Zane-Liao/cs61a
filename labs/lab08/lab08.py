@@ -8,7 +8,10 @@ def convert_link(link):
     []
     """
     "*** YOUR CODE HERE ***"
-
+    if link is Link.empty:
+        return []
+    else:
+        return [link.first] + convert_link(link.rest)
 
 def every_other(s):
     """Mutates a linked list so that all the odd-indiced elements are removed
@@ -28,7 +31,11 @@ def every_other(s):
     Link(4)
     """
     "*** YOUR CODE HERE ***"
-
+    # s.first and s.rest if s.first and s.rest.first
+    if s is Link.empty or s.rest is Link.empty:
+        return
+    s.rest = s.rest.rest
+    s.rest.rest = s.empty
 
 def cumulative_mul(t):
     """Mutates t so that each node's label becomes the product of all labels in
@@ -40,7 +47,10 @@ def cumulative_mul(t):
     Tree(105, [Tree(15, [Tree(5)]), Tree(7)])
     """
     "*** YOUR CODE HERE ***"
-
+    for b in t.branches:
+        cumulative_mul(b)
+        b.label *= t.label
+        # b.label = b.label * t.label
 
 def has_cycle(link):
     """Return whether link contains a cycle.
