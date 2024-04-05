@@ -67,6 +67,8 @@ def has_cycle(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    # 不好意思，今天我去寻找女朋友了，代码鸽子了，明日再来
+
 
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
@@ -138,7 +140,8 @@ class Link:
             string += str(self.first) + ' '
             self = self.rest
         return string + str(self.first) + '>'
-
+    
+    
 
 class Tree:
     """
