@@ -1,2 +1,3 @@
 'convert_link-correct', (0, 66)
 'every_other-correct', (512, 66)
+'has_cycle-correct', (1024, 66)

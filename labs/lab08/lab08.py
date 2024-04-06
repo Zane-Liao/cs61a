@@ -67,8 +67,13 @@ def has_cycle(link):
     False
     """
     "*** YOUR CODE HERE ***"
-    # 不好意思，今天我去寻找女朋友了，代码鸽子了，明日再来
-
+    links  = []
+    while link is not Link.empty:
+        if link in links:
+            return True
+        links.append(link)
+        link = link.rest
+    return False
 
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
@@ -216,4 +221,3 @@ class Tree:
                 tree_str += print_tree(b, indent + 1)
             return tree_str
         return print_tree(self).rstrip()
-
