@@ -87,6 +87,8 @@ def has_cycle_constant(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    
+
 
 
 def reverse_other(t):
@@ -103,7 +105,7 @@ def reverse_other(t):
     Tree(1, [Tree(8, [Tree(3, [Tree(5), Tree(4)]), Tree(6, [Tree(7)])]), Tree(2)])
     """
     "*** YOUR CODE HERE ***"
-
+    
 
 class Link:
     """A linked list.

@@ -105,6 +105,14 @@ def balanced(m):
     True
     """
     "*** YOUR CODE HERE ***"
+    # if len(m) == 3 or is_planet(m) or total_weight(m):
+    # return True
+    # else:
+    # return False
+    # return balanced(len(m)-1)
+    # check planet
+    # length * total arms
+    # check arm
 
 def totals_tree(m):
     """Return a tree representing the mobile with its total weight at the root.

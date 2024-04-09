@@ -20,8 +20,19 @@ def make_bank(balance):
     """
     def bank(message, amount):
         "*** YOUR CODE HERE ***"
+        nonlocal balance
+        if message == 'deposit':
+            balance += amount
+            return balance
+        if message == 'withdraw':
+            if balance > amount:
+                balance -= amount
+                return balance
+            else:
+                return 'Insufficient funds'
+        if not message == 'deposit' or message == 'withrdaw':
+            return 'Invalid message'
     return bank
-
 
 def make_withdraw(balance, password):
     """Return a password-protected withdraw function.
@@ -52,6 +63,7 @@ def make_withdraw(balance, password):
     True
     """
     "*** YOUR CODE HERE ***"
+
 
 
 def repeated(t, k):
