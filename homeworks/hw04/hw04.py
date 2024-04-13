@@ -63,7 +63,20 @@ def make_withdraw(balance, password):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    error_password = []
+    def withdraw(amount, in_password):
+        nonlocal balance
+        if len(error_password) == 3:
+            return "Frozen account. Attempts: " + str(error_password)
+        if in_password != password:
+            error_password.append(in_password)
+            return 'Incorrect password'
+        if balance > amount:
+            balance -= amount
+            return balance
+        if amount > balance:
+            return 'Insufficient funds'
+    return withdraw
 
 
 def repeated(t, k):
@@ -88,6 +101,17 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
+    count = 1
+    last_item = None
+    while True:
+        item = next(t)
+        if item  == last_item:
+            count += 1
+        else: 
+            last_item = item
+            count = 1
+        if count == k:
+            return item
 
 
 def permutations(seq):
@@ -204,4 +228,3 @@ def naturals():
     while True:
         yield i
         i += 1
-
