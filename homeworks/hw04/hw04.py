@@ -107,12 +107,11 @@ def repeated(t, k):
         item = next(t)
         if item  == last_item:
             count += 1
-        else: 
+        else:
             last_item = item
             count = 1
         if count == k:
             return item
-
 
 def permutations(seq):
     """Generates all permutations of the given sequence. Each permutation is a
@@ -137,7 +136,12 @@ def permutations(seq):
     [['a', 'b'], ['b', 'a']]
     """
     "*** YOUR CODE HERE ***"
-
+    if not seq: 
+        yield []
+    else: 
+        for p in permutations(seq[1:]): 
+            for i in range(len(seq)):
+                yield p[:i] + [seq[0]] + p[i:]
 
 def make_joint(withdraw, old_pass, new_pass):
     """Return a password-protected withdraw function that has joint access to
