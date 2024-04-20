@@ -36,7 +36,35 @@ class VendingMachine:
     'Here is your soda.'
     """
     "*** YOUR CODE HERE ***"
+    def __init__(self, com_name, com_price): 
+        self.com_name = com_name
+        self.com_price = com_price
+        self.balance = 0
+        self.store = 0
+    def vend(self):
+        if self.balance == 0 and self.store == 0:
+            return 'Inventory empty. Restocking required.'
+        elif self.balance < self.com_price and self.store > 0:
+            return 'You must add ${0} more funds.'.format(self.com_price-self.balance)
+        elif self.store > 0 and self.balance > self.com_price:
+            change = self.balance - self.com_price
+            self.balance = 0
+            self.store -= 1
+            return 'Here is your {0} and ${1} change.'.format(self.com_name, change)
+        else:
+            self.store -= 1
+            self.balance = 0
+            return 'Here is your {0}.'.format(self.com_name)
+    def add_funds(self,input_money):
+        if self.store == 0:
+            return 'Inventory empty. Restocking required. Here is your ${0}.'.format(input_money)
+        else:
+            self.balance +=input_money
+            return 'Current balance: ${0}'.format(self.balance)
 
+    def restock(self,restore_num):
+        self.store += restore_num
+        return 'Current {0} stock: {1}'.format(self.com_name,self.store)
 
 class Mint:
     """A mint creates coins by stamping on years.
