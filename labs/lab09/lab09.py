@@ -20,10 +20,9 @@ def subseqs(s):
     [[]]
     """
     if not s:
-       return [[]]
+        return [[]]
     else:
         return insert_into_all(s[0], subseqs(s[1:])) + subseqs(s[1:])
-
 
 def inc_subseqs(s):
     """Assuming that S is a list, return a nested list of all subsequences
@@ -41,14 +40,14 @@ def inc_subseqs(s):
     """
     def subseq_helper(s, prev):
         if not s:
-            return [[]] 
+            return [[]]
         elif s[0] < prev:
-            return  
+            return subseq_helper(s[1:], prev)
         else:
-            a = ______________________
-            b = ______________________
-            return insert_into_all(________, ______________) + ________________
-    return subseq_helper(____, ____)
+            a = subseq_helper(s[1:], s[0])
+            b = subseq_helper(s[1:], prev)
+            return insert_into_all(s[0], a) + b
+    return subseq_helper(s, 0)
 
 
 def num_trees(n):
@@ -71,9 +70,9 @@ def num_trees(n):
     429
 
     """
-    if ____________________:
-        return _______________
-    return _______________
+    if n == 1:
+        return 1
+    return sum(num_trees(i) * num_trees(n-i) for i in range(1, n))
 
 
 def make_generators_generator(g):

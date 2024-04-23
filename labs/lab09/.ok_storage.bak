@@ -1,2 +1,4 @@
 'insert_into_all-correct', (0, 66)
 'subseqs-correct', (512, 66)
+'inc_subseqs-correct', (1024, 66)
+'num_trees-correct', (1536, 66)
