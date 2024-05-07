@@ -24,7 +24,7 @@ def count_same(pairs):
 
 def mysum(L):
     if (L==[]):
-       return 0
+        return 0
     else:
         return L[0] + mysum(L[1:])
 
@@ -36,7 +36,6 @@ def mysum_iter(L):
         for x in L[0:]:
             total += x
     return total
-            
 
 def count_for(n):
     sum = 0
