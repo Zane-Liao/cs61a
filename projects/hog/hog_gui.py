@@ -79,7 +79,7 @@ def take_turn(prev_rolls, move_history, goal, game_rules):
 
         try:
             final_scores = trace_play(hog.play, strategy_for(0), strategy_for(1),
-                                      0, 0, dice=logged_dice, say=log, goal=goal)[:2]
+                                        0, 0, dice=logged_dice, say=log, goal=goal)[:2]
         except HogLoggingException:
             pass
         else:

@@ -59,7 +59,7 @@ class VendingMachine:
         if self.store == 0:
             return 'Inventory empty. Restocking required. Here is your ${0}.'.format(input_money)
         else:
-            self.balance +=input_money
+            self.balance += input_money
             return 'Current balance: ${0}'.format(self.balance)
 
     def restock(self,restore_num):
@@ -96,6 +96,7 @@ class Mint:
     125
     """
     current_year = 2020
+    
 
     def __init__(self): 
         self.update()
@@ -114,7 +115,7 @@ class Coin:
 
     def worth(self):
         "*** YOUR CODE HERE ***"
-        return self.cents
+        return self.cents + max()
 
 class Nickel(Coin):
     cents = 5
@@ -139,6 +140,8 @@ def store_digits(n):
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     """
     "*** YOUR CODE HERE ***"
+    index = 0
+    
 
 
 def is_bst(t):
