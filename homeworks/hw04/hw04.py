@@ -1,3 +1,6 @@
+HW_SOURCE_FILE=__file__
+
+
 def make_bank(balance):
     """Returns a bank function with a starting balance. Supports
     withdrawals and deposits.
@@ -19,7 +22,6 @@ def make_bank(balance):
     120
     """
     def bank(message, amount):
-        "*** YOUR CODE HERE ***"
         nonlocal balance
         if message == 'deposit':
             balance += amount
@@ -62,7 +64,6 @@ def make_withdraw(balance, password):
     >>> type(w(10, 'l33t')) == str
     True
     """
-    "*** YOUR CODE HERE ***"
     error_password = []
     def withdraw(amount, in_password):
         nonlocal balance
@@ -100,7 +101,6 @@ def repeated(t, k):
     2
     """
     assert k > 1
-    "*** YOUR CODE HERE ***"
     count = 1
     last_item = None
     while True:
@@ -135,7 +135,6 @@ def permutations(seq):
     >>> sorted(permutations("ab"))
     [['a', 'b'], ['b', 'a']]
     """
-    "*** YOUR CODE HERE ***"
     if not seq: 
         yield []
     else: 
@@ -181,8 +180,16 @@ def make_joint(withdraw, old_pass, new_pass):
     >>> make_joint(w, 'hax0r', 'hello')
     "Frozen account. Attempts: ['my', 'secret', 'password']"
     """
-    "*** YOUR CODE HERE ***"
-
+    # openai gpt4o
+    test_w = withdraw(0, old_pass)
+    if type(test_w) == str:
+        return test_w
+    def joint(amount, a_password):
+        if a_password == new_pass or a_password == old_pass:
+            return withdraw(amount, old_pass)
+        else:
+            return withdraw(amount, a_password)
+    return joint
 
 def remainders_generator(m):
     """
@@ -215,8 +222,6 @@ def remainders_generator(m):
     7
     11
     """
-    "*** YOUR CODE HERE ***"
-
 
 def naturals():
     """A generator function that yields the infinite sequence of natural

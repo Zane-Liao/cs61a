@@ -43,12 +43,12 @@ def end(s):
 def planet(size):
     """Construct a planet of some size."""
     assert size > 0
-    "*** YOUR CODE HERE ***"
+    return ['planet', size]
 
 def size(w):
     """Select the size of a planet."""
     assert is_planet(w), 'must call size on a planet'
-    "*** YOUR CODE HERE ***"
+    return w[1]
 
 def is_planet(w):
     """Whether w is a planet."""
@@ -56,10 +56,10 @@ def is_planet(w):
 
 def examples():
     t = mobile(arm(1, planet(2)),
-               arm(2, planet(1)))
+                arm(2, planet(1)))
     u = mobile(arm(5, planet(1)),
-               arm(1, mobile(arm(2, planet(3)),
-                              arm(3, planet(2)))))
+                arm(1, mobile(arm(2, planet(3)),
+                                arm(3, planet(2)))))
     v = mobile(arm(4, t), arm(2, u))
     return (t, u, v)
 
@@ -104,15 +104,11 @@ def balanced(m):
     >>> check(HW_SOURCE_FILE, 'balanced', ['Index'])
     True
     """
-    "*** YOUR CODE HERE ***"
-    # if len(m) == 3 or is_planet(m) or total_weight(m):
-    # return True
-    # else:
-    # return False
-    # return balanced(len(m)-1)
-    # check planet
-    # length * total arms
-    # check arm
+    if is_planet(m): 
+        return True
+    return (length(left(m))*total_weight(end(left(m))) ==
+            length(right(m))*total_weight(end(right(m))) and
+            balanced(end(left(m))) and balanced(end(right(m))))
 
 def totals_tree(m):
     """Return a tree representing the mobile with its total weight at the root.
@@ -143,7 +139,10 @@ def totals_tree(m):
     >>> check(HW_SOURCE_FILE, 'totals_tree', ['Index'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if is_planet(m): 
+        return tree(size(m))
+    if is_mobile(m): 
+        return tree(total_weight(m), [totals_tree(end(left(m))), totals_tree(end(right(m)))])
 
 
 def replace_leaf(t, find_value, replace_value):
@@ -175,7 +174,13 @@ def replace_leaf(t, find_value, replace_value):
     >>> laerad == yggdrasil # Make sure original tree is unmodified
     True
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t): 
+        if label(t) == find_value:
+            return tree(replace_value)
+        else: 
+            return t
+    else: 
+        return tree(label(t), [replace_leaf(i, find_value, replace_value) for i in branches(t)])
 
 
 def preorder(t):
@@ -188,8 +193,12 @@ def preorder(t):
     >>> preorder(tree(2, [tree(4, [tree(6)])]))
     [2, 4, 6]
     """
-    "*** YOUR CODE HERE ***"
-
+    new_list = []
+    if is_leaf(t):
+        new_list = label(t)
+    else: 
+        new_list = label(t)
+    return [new_list] + [x for b in branches(t) for x in preorder(b)]
 
 def has_path(t, word):
     """Return whether there is a path in a tree where the entries along the path
@@ -220,7 +229,26 @@ def has_path(t, word):
     False
     """
     assert len(word) > 0, 'no path for empty word.'
-    "*** YOUR CODE HERE ***"
+    # if t -> [ h, [i, e, [l, [l, [o]], y]]] word -> 'h'
+    # True
+    # if t -> [ h, [i, e, [l, [l, [o]], y]]] word -> 'i'
+    # False
+    # if t -> [ h, [i, e, [l, [l, [o]], y]]] word -> 'hi'
+    # True
+    # if t -> [ h, [i, e, [l, [l, [o]], y]]] word -> 'hello'
+    # True
+    # if t -> [ h, [i, e, [l, [l, [o]], y]]] word -> 'hey'
+    # True
+    # if t -> [ h, [i, e, [l, [l, [o]], y]]] word -> 'bye'
+    # False
+    for i in word: 
+        if i == label(t): 
+            return True
+        else: 
+            if len(i) != 1: 
+                next(i)
+            else: 
+                return False
 
 
 def interval(a, b):

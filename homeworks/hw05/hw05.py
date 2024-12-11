@@ -35,7 +35,6 @@ class VendingMachine:
     >>> w.vend()
     'Here is your soda.'
     """
-    "*** YOUR CODE HERE ***"
     def __init__(self, com_name, com_price): 
         self.com_name = com_name
         self.com_price = com_price
@@ -96,26 +95,23 @@ class Mint:
     125
     """
     current_year = 2020
-    
 
-    def __init__(self): 
+    def __init__(self):
         self.update()
+        self.year = Mint.current_year
 
     def create(self, kind):
-        "*** YOUR CODE HERE ***"
         return kind(self.year)
 
     def update(self):
-        "*** YOUR CODE HERE ***"
-        self.year = self.current_year
+        self.year = Mint.current_year
 
 class Coin:
     def __init__(self, year):
         self.year = year
 
     def worth(self):
-        "*** YOUR CODE HERE ***"
-        return self.cents + max()
+        return self.cents + max(Mint.current_year - self.year - 50, 0)
 
 class Nickel(Coin):
     cents = 5
@@ -139,10 +135,17 @@ def store_digits(n):
     >>> cleaned = re.sub(r"#.*\\n", '', re.sub(r'"{3}[\s\S]*?"{3}', '', inspect.getsource(store_digits)))
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     """
-    "*** YOUR CODE HERE ***"
-    index = 0
-    
-
+    # True solution
+    result = Link.empty
+    while n > 0: 
+        result = Link(n % 10, result)
+        n //= 10
+    return result
+    # My solution(Error)
+    # if n < 10: 
+    #     return Link(n)
+    # else:
+    #     return Link(n % 10, store_digits(n//10))
 
 def is_bst(t):
     """Returns True if the Tree t has the structure of a valid BST.
@@ -169,8 +172,56 @@ def is_bst(t):
     >>> is_bst(t7)
     False
     """
-    "*** YOUR CODE HERE ***"
+    # My solution ...Error
+    # BST
+    # 2 children
+    # every one (node's left child <= label of the node)
+    # every one (node's right child >= lable of the node)
+    # 
+    # if ___: 
+    # return True
+    # else: 
+    # return False
+    # def bst_min(): 
+    #     while t.branches[0]:
+    #         node = t.branches[0]
+    #     return node
+    # def bst_max()      : 
+    # while t.branches[1]: 
+    # t.label and t.branches[1].label nothing to t.branches[2].label
+    # for b in t.branches: 
+    #     b.branches[0].branches[0].label
+    # b.label <= b.branches[0].label
+    # b.branches[1].label >= b.label
+    # b.branches[0].branches[0].label <= b.branches[0].label
+    # b.branches[1].branches[0].label >= b.branches[1].label
+    # t.branches[0] and t.branches[1]
 
+
+    #True solution
+    def bst_min(t): 
+        """Returns the min of t, if t has the structure of a valid BST."""
+        if t.is_leaf():
+            return t.label
+        return min(t.label, bst_min(t.branches[0]))
+
+    def bst_max(t):
+        """Returns the max of t, if t has the structure of a valid BST."""
+        if t.is_leaf():
+            return t.label
+        return max(t.label, bst_max(t.branches[-1]))
+
+    if t.is_leaf():
+        return True
+    if len(t.branches) == 1:
+        c = t.branches[0]
+        return is_bst(c) and (bst_max(c) <= t.label or bst_min(c) > t.label)
+    elif len(t.branches) == 2:
+        c1, c2 = t.branches
+        valid_branches = is_bst(c1) and is_bst(c2)
+        return valid_branches and bst_max(c1) <= t.label and bst_min(c2) > t.label
+    else:
+        return False
 
 def preorder(t):
     """Return a list of the entries in this tree in the order that they
@@ -182,7 +233,12 @@ def preorder(t):
     >>> preorder(Tree(2, [Tree(4, [Tree(6)])]))
     [2, 4, 6]
     """
-    "*** YOUR CODE HERE ***"
+    new_list = []
+    if t.is_leaf():
+        new_list = t.label
+    else: 
+        new_list = t.label
+    return [new_list] + [x for b in t.branches for x in preorder(b)]
 
 
 def path_yielder(t, value):
@@ -221,11 +277,14 @@ def path_yielder(t, value):
     """
 
     "*** YOUR CODE HERE ***"
+    # Solution
+    if t.label == value:
+        yield [value]
 
-    for _______________ in _________________:
-        for _______________ in _________________:
-
+    for b in t.branches:
+        for p in path_yielder(b, value):
             "*** YOUR CODE HERE ***"
+            yield [t.label] + p
 
 
 class Link:
